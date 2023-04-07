@@ -13,8 +13,8 @@ struct MetLinkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MapContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+            //MapContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

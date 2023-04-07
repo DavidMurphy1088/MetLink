@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F629DEA2F000342490 /* MetLinkApp.swift */; };
-		7B7306F929DEA2F000342490 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F829DEA2F000342490 /* ContentView.swift */; };
+		7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F829DEA2F000342490 /* MapContentView.swift */; };
 		7B7306FB29DEA2F200342490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B7306FA29DEA2F200342490 /* Assets.xcassets */; };
 		7B7306FE29DEA2F200342490 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B7306FD29DEA2F200342490 /* Preview Assets.xcassets */; };
 		7B73070029DEA2F200342490 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306FF29DEA2F200342490 /* Persistence.swift */; };
 		7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070129DEA2F200342490 /* MetLink.xcdatamodeld */; };
+		7B73070B29DEC49C00342490 /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070A29DEC49C00342490 /* Positions.swift */; };
+		7B73070F29DED8DA00342490 /* PostitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070E29DED8DA00342490 /* PostitonsView.swift */; };
+		7B73071129DEF34B00342490 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 7B73071029DEF34B00342490 /* Notes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7B7306F329DEA2F000342490 /* MetLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7306F629DEA2F000342490 /* MetLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetLinkApp.swift; sourceTree = "<group>"; };
-		7B7306F829DEA2F000342490 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7B7306F829DEA2F000342490 /* MapContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContentView.swift; sourceTree = "<group>"; };
 		7B7306FA29DEA2F200342490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B7306FD29DEA2F200342490 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7B7306FF29DEA2F200342490 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7B73070229DEA2F200342490 /* MetLink.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MetLink.xcdatamodel; sourceTree = "<group>"; };
 		7B73070429DEA2F200342490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B73070A29DEC49C00342490 /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
+		7B73070E29DED8DA00342490 /* PostitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostitonsView.swift; sourceTree = "<group>"; };
+		7B73071029DEF34B00342490 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +62,14 @@
 		7B7306F529DEA2F000342490 /* MetLink */ = {
 			isa = PBXGroup;
 			children = (
-				7B7306F629DEA2F000342490 /* MetLinkApp.swift */,
-				7B7306F829DEA2F000342490 /* ContentView.swift */,
+				7B73070D29DED80900342490 /* View */,
+				7B73070C29DED7F700342490 /* Model */,
 				7B7306FA29DEA2F200342490 /* Assets.xcassets */,
 				7B7306FF29DEA2F200342490 /* Persistence.swift */,
 				7B73070429DEA2F200342490 /* Info.plist */,
 				7B73070129DEA2F200342490 /* MetLink.xcdatamodeld */,
 				7B7306FC29DEA2F200342490 /* Preview Content */,
+				7B73071029DEF34B00342490 /* Notes */,
 			);
 			path = MetLink;
 			sourceTree = "<group>";
@@ -73,6 +80,24 @@
 				7B7306FD29DEA2F200342490 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7B73070C29DED7F700342490 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B73070A29DEC49C00342490 /* Positions.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7B73070D29DED80900342490 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7B7306F829DEA2F000342490 /* MapContentView.swift */,
+				7B7306F629DEA2F000342490 /* MetLinkApp.swift */,
+				7B73070E29DED8DA00342490 /* PostitonsView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B73071129DEF34B00342490 /* Notes in Resources */,
 				7B7306FE29DEA2F200342490 /* Preview Assets.xcassets in Resources */,
 				7B7306FB29DEA2F200342490 /* Assets.xcassets in Resources */,
 			);
@@ -147,7 +173,9 @@
 			files = (
 				7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */,
 				7B73070029DEA2F200342490 /* Persistence.swift in Sources */,
-				7B7306F929DEA2F000342490 /* ContentView.swift in Sources */,
+				7B73070F29DED8DA00342490 /* PostitonsView.swift in Sources */,
+				7B73070B29DEC49C00342490 /* Positions.swift in Sources */,
+				7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */,
 				7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
