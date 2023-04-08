@@ -88,17 +88,19 @@ struct MapContentView: View {
     }
     
     var body: some View {
-        Map(coordinateRegion: $region, annotationItems: self.makePoints()) { point in
-          MapAnnotation(coordinate: point.coordinate) {
-              PlaceAnnotationView(title: point.title, direction: point.direction)
-          }
-        }
-        HStack {
-            Button("Refresh") {
-                vehiclePositions.getPositions()
+        VStack {
+            Map(coordinateRegion: $region, annotationItems: self.makePoints()) { point in
+                MapAnnotation(coordinate: point.coordinate) {
+                    PlaceAnnotationView(title: point.title, direction: point.direction)
+                }
             }
-            Text(self.formatTime())
-            Text(vehiclePositions.status ?? "")
+            HStack {
+                Button("Refresh") {
+                    vehiclePositions.getPositions()
+                }
+                Text(self.formatTime())
+                Text(vehiclePositions.status ?? "")
+            }
         }
     }
 }

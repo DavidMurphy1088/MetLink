@@ -14,7 +14,7 @@
 		7B73070029DEA2F200342490 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306FF29DEA2F200342490 /* Persistence.swift */; };
 		7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070129DEA2F200342490 /* MetLink.xcdatamodeld */; };
 		7B73070B29DEC49C00342490 /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070A29DEC49C00342490 /* Positions.swift */; };
-		7B73070F29DED8DA00342490 /* PostitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070E29DED8DA00342490 /* PostitonsView.swift */; };
+		7B73070F29DED8DA00342490 /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070E29DED8DA00342490 /* ConfigurationView.swift */; };
 		7B73071129DEF34B00342490 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 7B73071029DEF34B00342490 /* Notes */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		7B73070229DEA2F200342490 /* MetLink.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MetLink.xcdatamodel; sourceTree = "<group>"; };
 		7B73070429DEA2F200342490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B73070A29DEC49C00342490 /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
-		7B73070E29DED8DA00342490 /* PostitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostitonsView.swift; sourceTree = "<group>"; };
+		7B73070E29DED8DA00342490 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		7B73071029DEF34B00342490 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +95,7 @@
 			children = (
 				7B7306F829DEA2F000342490 /* MapContentView.swift */,
 				7B7306F629DEA2F000342490 /* MetLinkApp.swift */,
-				7B73070E29DED8DA00342490 /* PostitonsView.swift */,
+				7B73070E29DED8DA00342490 /* ConfigurationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 			files = (
 				7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */,
 				7B73070029DEA2F200342490 /* Persistence.swift in Sources */,
-				7B73070F29DED8DA00342490 /* PostitonsView.swift in Sources */,
+				7B73070F29DED8DA00342490 /* ConfigurationView.swift in Sources */,
 				7B73070B29DEC49C00342490 /* Positions.swift in Sources */,
 				7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */,
 				7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */,

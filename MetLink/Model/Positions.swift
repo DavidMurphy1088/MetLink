@@ -86,6 +86,7 @@ class VehiclePositions: ObservableObject {
                     print("no data error loading:", error as Any)
                     return
                 }
+                print("checkData0:", self.checkData(data))
 //                var i = 0
 //                for byte in data {
 //                    //if byte < 0x00 || byte > 0x7F {
@@ -132,7 +133,6 @@ class VehiclePositions: ObservableObject {
                                         if self.vehiclePositions.count % 1 == 0 {
                                             print("\nRoute", vehicle.trip.route_id, "Direction", vehicle.trip.direction_id, "Date", vehicle.trip.start_date, "time", vehicle.trip.start_time)
                                             print("Route IDs -------> loaded count:", self.vehiclePositions.count, routeIdSet)
-                                            
                                         }
                                     }
                                     if self.vehiclePositions.count > 10000 {
@@ -146,10 +146,7 @@ class VehiclePositions: ObservableObject {
                 }
                 catch let error as DecodingError {
                     self.setStatus("JSON error:", error)
-                    if let string = String(data: data.prefix(200), encoding: .utf8) {
-                    //if let string = String(data: data, encoding: .utf8) {
-                        print("\n\n", string, "\n\n")
-                    }
+                    print("checkData:", self.checkData(data))
                     return
                 }
                 catch {
@@ -159,6 +156,32 @@ class VehiclePositions: ObservableObject {
                 }
             }
             task.resume()
+    }
+    
+    func checkData(_ data: Data) -> Bool {
+//        if let jsonString = String(data: data, encoding: .utf8) {
+//            return true
+//        }
+        var i = 0
+        var bad = 0
+        for byte in data {
+            if (byte >= 65 && byte <= 90) {
+                continue
+            }
+            if (byte >= 0 && byte <= 127) {
+                continue
+            }
+            bad += 1
+            let myScalar = UnicodeScalar(byte)
+            let myCharacter = Character(myScalar)
+            print ("non ascii", i, "byte:", byte, "character:", myScalar)
+            //}
+            i += 1
+            if bad > 10 {
+                break
+            }
+        }
+        return bad == 0
     }
 }
 
