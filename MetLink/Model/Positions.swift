@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Response: Codable {
+struct PositionsResponse: Codable {
     let header: Header?
     let entity: [Entity]?
 }
@@ -52,110 +52,15 @@ struct InnerVehicle: Codable {
 }
 
 class VehiclePositions: ObservableObject {
-    
     static let vehiclePositions = VehiclePositions()
     
     @Published var lastGetTime:Date?
     @Published var status:String?
     @Published var vehiclePositions:[VehiclePosition] = []
+    var logger = Logger.logger
     
     init() {
         self.getPositions()
-    }
-    
-    func setStatus(_ str:String, _ err:Error? = nil) {
-        print("Model:", str + (err == nil ? "" : err!.localizedDescription))
-        DispatchQueue.main.async {
-            self.status = str
-            if let error = err {
-                self.status! += error.localizedDescription
-            }
-        }
-    }
-    
-    func getPositions() {
-            let url = URL(string: "https://api.opendata.metlink.org.nz/v1/gtfs-rt/vehiclepositions")!
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            request.setValue("bqgukXkCrc8ASUt1KWb3GUEB1jQVziP4my82gdM0", forHTTPHeaderField: "x-api-key")
-            setStatus("Starting loading...")
-        
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                guard let data = data, error == nil else {
-                    print("no data error loading:", error as Any)
-                    return
-                }
-                print("checkData0:", self.checkData(data))
-//                var i = 0
-//                for byte in data {
-//                    //if byte < 0x00 || byte > 0x7F {
-//                    if byte < 0x30 || byte > 0x7A {
-//                        print("***", i, byte)
-//                    }
-//                    i += 1
-//                }
-                
-//                do {
-//                    if JSONSerialization.isValidJSONObject(data) {
-//                        _ = try JSONSerialization.data(withJSONObject: data)
-//                        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-//                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-//                            print(jsonString)
-//                        }
-//
-//                    } else {
-//                        // not valid - do something appropriate
-//                    }
-//                }
-//                catch {
-//                    print("Some vague internal error: \(error)")
-//                }
-                
-                var routeIdSet: Set<Int> = []
-                var busIdSet: Set<String> = []
-
-                let decoder = JSONDecoder()
-                do {
-                    let response = try decoder.decode(Response.self, from: data)
-                    let hdr = response.header
-                    if let entity = response.entity {
-                        DispatchQueue.main.async {
-                            self.lastGetTime = Date()
-                            self.vehiclePositions = []
-                            for ent in entity {
-                                if let vehicle = ent.vehicle {
-                                    if vehicle.trip.route_id == 20 {
-                                        routeIdSet.insert(vehicle.trip.route_id)
-                                        //busIdSet.insert(ent.vehicle.trip.)
-                                    
-                                        self.vehiclePositions.append(vehicle)
-                                        if self.vehiclePositions.count % 1 == 0 {
-                                            print("\nRoute", vehicle.trip.route_id, "Direction", vehicle.trip.direction_id, "Date", vehicle.trip.start_date, "time", vehicle.trip.start_time)
-                                            print("Route IDs -------> loaded count:", self.vehiclePositions.count, routeIdSet)
-                                        }
-                                    }
-                                    if self.vehiclePositions.count > 10000 {
-                                        break
-                                    }
-                                }
-                            }
-                            self.setStatus("Loaded \(self.vehiclePositions.count) trips")
-                        }
-                    }
-                }
-                catch let error as DecodingError {
-                    self.setStatus("JSON error:", error)
-                    print("checkData:", self.checkData(data))
-                    return
-                }
-                catch {
-                    self.setStatus("General error:", error)
-                          //"\n---Response", response.debugDescription,
-                          //"\n---Data", data.count)
-                }
-            }
-            task.resume()
     }
     
     func checkData(_ data: Data) -> Bool {
@@ -183,5 +88,66 @@ class VehiclePositions: ObservableObject {
         }
         return bad == 0
     }
+    
+    func getPositionsHandler(data:Data) -> Int {
+        let decoder = JSONDecoder()
+        do {
+            let response = try decoder.decode(PositionsResponse.self, from: data)
+            if let positionResponse = response as? PositionsResponse {
+                if let entity = positionResponse.entity {
+                    self.lastGetTime = Date()
+                    self.vehiclePositions = []
+                    var routeIdSet: Set<Int> = []
+                    
+                    for ent in entity {
+                        if let vehicle = ent.vehicle {
+                            if vehicle.trip.route_id == 20 {
+                                routeIdSet.insert(vehicle.trip.route_id)
+                                //busIdSet.insert(ent.vehicle.trip.)
+                                
+                                self.vehiclePositions.append(vehicle)
+                                if self.vehiclePositions.count % 1 == 0 {
+                                    print("\nRoute", vehicle.trip.route_id, "Direction", vehicle.trip.direction_id, "Date", vehicle.trip.start_date, "time", vehicle.trip.start_time)
+                                    print("Route IDs -------> loaded count:", self.vehiclePositions.count, routeIdSet)
+                                }
+                            }
+                            if self.vehiclePositions.count > 10000 {
+                                break
+                            }
+                        }
+                    }
+                    self.logger.log("Loaded \(self.vehiclePositions.count) trips")
+                }
+            }
+        }
+        catch let error as DecodingError {
+            Logger.logger.log("JSON error:", error)
+            print("checkData:", self.checkData(data))
+        }
+        catch {
+            Logger.logger.log("General error:", error)
+        }
+        
+        return 0
+    }
+    
+    func getPositions() {
+        MetLink.metlink.callAPI(url: "https://api.opendata.metlink.org.nz/v1/gtfs-rt/vehiclepositions", handler: getPositionsHandler)
+    }
 }
 
+//                do {
+//                    if JSONSerialization.isValidJSONObject(data) {
+//                        _ = try JSONSerialization.data(withJSONObject: data)
+//                        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+//                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                            print(jsonString)
+//                        }
+//
+//                    } else {
+//                        // not valid - do something appropriate
+//                    }
+//                }
+//                catch {
+//                    print("Some vague internal error: \(error)")
+//                }

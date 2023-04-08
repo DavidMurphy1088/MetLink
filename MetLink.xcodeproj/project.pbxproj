@@ -16,6 +16,8 @@
 		7B73070B29DEC49C00342490 /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070A29DEC49C00342490 /* Positions.swift */; };
 		7B73070F29DED8DA00342490 /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B73070E29DED8DA00342490 /* ConfigurationView.swift */; };
 		7B73071129DEF34B00342490 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 7B73071029DEF34B00342490 /* Notes */; };
+		7BD47E0529E156330047A9A3 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0429E156330047A9A3 /* Routes.swift */; };
+		7BD47E0729E15BB70047A9A3 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0629E15BB70047A9A3 /* Globals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		7B73070A29DEC49C00342490 /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
 		7B73070E29DED8DA00342490 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		7B73071029DEF34B00342490 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
+		7BD47E0429E156330047A9A3 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		7BD47E0629E15BB70047A9A3 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +89,9 @@
 		7B73070C29DED7F700342490 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7BD47E0429E156330047A9A3 /* Routes.swift */,
 				7B73070A29DEC49C00342490 /* Positions.swift */,
+				7BD47E0629E15BB70047A9A3 /* Globals.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +180,8 @@
 				7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */,
 				7B73070029DEA2F200342490 /* Persistence.swift in Sources */,
 				7B73070F29DED8DA00342490 /* ConfigurationView.swift in Sources */,
+				7BD47E0529E156330047A9A3 /* Routes.swift in Sources */,
+				7BD47E0729E15BB70047A9A3 /* Globals.swift in Sources */,
 				7B73070B29DEC49C00342490 /* Positions.swift in Sources */,
 				7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */,
 				7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */,

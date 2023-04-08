@@ -27,6 +27,10 @@ struct ContentView: View {
             .tabItem {
                 Label("First", systemImage: "1.circle")
             }
+            ConfigurationView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .tabItem {
+                Label("First", systemImage: "2.circle")
+            }
 //            MapContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            .tabItem {
 //                Label("Second", systemImage: "2.circle")
