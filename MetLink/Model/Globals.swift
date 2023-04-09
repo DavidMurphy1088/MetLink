@@ -5,9 +5,19 @@ class Logger : ObservableObject {
     var message:String=""
     
     func log(_ str:String, _ err:Error? = nil) {
-        print("Logger:", err == nil ? "" : "*** ERROR ***", str + (err == nil ? "" : err!.localizedDescription))
+        var msg = "Logger:"
+        if let err = err {
+            msg += "*** ERROR ***"
+            msg += "\nlocalMsg:"+err.localizedDescription
+            //str + "\nfullMsg:"+err.
+        }
+        msg += str
+        print(msg)
+        if let err = err {
+            print(err)
+        }
         DispatchQueue.main.async {
-            self.message = str
+            self.message = msg
             if let error = err {
                 self.message += error.localizedDescription
             }
@@ -17,6 +27,25 @@ class Logger : ObservableObject {
 
 class MetLink {
     static var metlink = MetLink()
+    
+    init() {
+        let dispatchGroup = DispatchGroup()
+
+        dispatchGroup.enter()
+        Routes.routes.getRoutes()
+//        { result in
+//            dispatchGroup.leave()
+//        }
+
+        dispatchGroup.wait()
+
+        dispatchGroup.enter()
+        VehiclePositions.vehiclePositions.getPositions()
+            // Handle the result of the second API call
+            //dispatchGroup.leave()
+        //}
+    }
+    
     func makeRequest(_ urlStr:String) -> URLRequest {
         let url = URL(string: urlStr)!
         var request = URLRequest(url: url)

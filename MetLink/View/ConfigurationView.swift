@@ -5,9 +5,13 @@ import CoreData
 struct ConfigurationView: View {
     @ObservedObject var routes = Routes.routes
     
+    func getRouteDesc(route: Route) -> String {
+        return route.route_short_name + "->" +  route.route_desc
+    }
+
     var body: some View {
-        List(routes.routes, id: \.self) { route in
-            Toggle(route.route_desc, isOn: Binding(
+        List(routes.routeList.sorted(), id: \.self) { route in
+            Toggle(getRouteDesc(route: route), isOn: Binding(
                 get: { routes.selectedRoutes.contains(route) },
                 set: { isSelected in
                     if isSelected {
@@ -18,9 +22,6 @@ struct ConfigurationView: View {
                 }
             ))
         }
-//        .onAppear() {
-//            print(self.services.selectedServices)
-//        }
     }
 
 }

@@ -30,19 +30,50 @@ struct VehiclePosition: Codable, Hashable {
     let position: Position
     let vehicle: InnerVehicle
     let timestamp: Int
+    
+    func readingAgeSeconds() -> Int {
+        let d = Date(timeIntervalSince1970: TimeInterval(timestamp))
+        return Int(Date().timeIntervalSince(d))
+    }
 }
 
 struct Trip: Codable {
-    let start_time: String
+    //let start_time: String
     let trip_id: String
     let direction_id: Int
     let route_id: Int
-    let schedule_relationship: Int
-    let start_date: String
+    
+    //let schedule_relationship: String
+    //let start_date: String
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let intVal = try? values.decode(Int.self, forKey: .route_id), let routeId:Int? = intVal {
+            self.route_id = intVal
+        }
+        else {
+            //print("route", values.allKeys)
+            self.route_id = -1
+        }
+        
+        if let intVal = try? values.decode(Int.self, forKey: .direction_id), let directionId:Int? = intVal {
+            self.direction_id = intVal
+        }
+        else {
+            self.direction_id = -1
+        }
+        
+        if let strValue = try? values.decode(String.self, forKey: .trip_id), let tripIdDecoded:String? = strValue {
+            self.trip_id = tripIdDecoded!
+        } else {
+            self.trip_id=""
+        }
+    }
 }
 
 struct Position: Codable, Hashable {
-    let bearing: Int
+    //let bearing: Int
     let latitude: Double
     let longitude: Double
 }
@@ -60,69 +91,55 @@ class VehiclePositions: ObservableObject {
     var logger = Logger.logger
     
     init() {
-        self.getPositions()
+        //self.getPositions()
     }
     
     func checkData(_ data: Data) -> Bool {
-//        if let jsonString = String(data: data, encoding: .utf8) {
-//            return true
-//        }
-        var i = 0
-        var bad = 0
-        for byte in data {
-            if (byte >= 65 && byte <= 90) {
-                continue
-            }
-            if (byte >= 0 && byte <= 127) {
-                continue
-            }
-            bad += 1
-            let myScalar = UnicodeScalar(byte)
-            let myCharacter = Character(myScalar)
-            print ("non ascii", i, "byte:", byte, "character:", myScalar)
-            //}
-            i += 1
-            if bad > 10 {
-                break
-            }
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("\n\n", jsonString, "\n")
+            return true
         }
-        return bad == 0
+        return false
     }
     
     func getPositionsHandler(data:Data) -> Int {
         let decoder = JSONDecoder()
         do {
             let response = try decoder.decode(PositionsResponse.self, from: data)
-            if let positionResponse = response as? PositionsResponse {
-                if let entity = positionResponse.entity {
-                    self.lastGetTime = Date()
-                    self.vehiclePositions = []
-                    var routeIdSet: Set<Int> = []
-                    
-                    for ent in entity {
-                        if let vehicle = ent.vehicle {
-                            if vehicle.trip.route_id == 20 {
-                                routeIdSet.insert(vehicle.trip.route_id)
-                                //busIdSet.insert(ent.vehicle.trip.)
-                                
-                                self.vehiclePositions.append(vehicle)
-                                if self.vehiclePositions.count % 1 == 0 {
-                                    print("\nRoute", vehicle.trip.route_id, "Direction", vehicle.trip.direction_id, "Date", vehicle.trip.start_date, "time", vehicle.trip.start_time)
-                                    print("Route IDs -------> loaded count:", self.vehiclePositions.count, routeIdSet)
-                                }
-                            }
-                            if self.vehiclePositions.count > 10000 {
-                                break
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if let entity = response.entity {
+                self.lastGetTime = Date()
+                self.vehiclePositions = []
+                var routeIdSet: Set<Int> = []
+                print("\n")
+                
+                for ent in entity {
+                    if let vehicle = ent.vehicle {
+                        routeIdSet.insert(vehicle.trip.route_id)
+                        if vehicle.trip.route_id == 20 {
+                            //busIdSet.insert(ent.vehicle.trip.)
+                            self.vehiclePositions.append(vehicle)
+                            if self.vehiclePositions.count % 1 == 0 {
+                                //let tsDate = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
+                                //let secsDiff = Int(Date().timeIntervalSince(tsDate))
+                                print("\tAge", vehicle.readingAgeSeconds(), "\tRoute", vehicle.trip.route_id, "\tDirection", vehicle.trip.direction_id, "\tTrip", vehicle.trip.trip_id)
+                                //"\tloaded count:", self.vehiclePositions.count)
                             }
                         }
+                        if self.vehiclePositions.count > 10000 {
+                            break
+                        }
                     }
-                    self.logger.log("Loaded \(self.vehiclePositions.count) trips")
                 }
+                print("All routes", routeIdSet.sorted())
+                self.logger.log("Loaded \(self.vehiclePositions.count) trips")
             }
         }
         catch let error as DecodingError {
             Logger.logger.log("JSON error:", error)
-            print("checkData:", self.checkData(data))
+            //print("checkData:", self.checkData(data))
         }
         catch {
             Logger.logger.log("General error:", error)
@@ -135,19 +152,3 @@ class VehiclePositions: ObservableObject {
         MetLink.metlink.callAPI(url: "https://api.opendata.metlink.org.nz/v1/gtfs-rt/vehiclepositions", handler: getPositionsHandler)
     }
 }
-
-//                do {
-//                    if JSONSerialization.isValidJSONObject(data) {
-//                        _ = try JSONSerialization.data(withJSONObject: data)
-//                        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-//                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-//                            print(jsonString)
-//                        }
-//
-//                    } else {
-//                        // not valid - do something appropriate
-//                    }
-//                }
-//                catch {
-//                    print("Some vague internal error: \(error)")
-//                }
