@@ -19,9 +19,9 @@ struct ConfigurationView: View {
                     } else {
                         routes.selectedRoutes.remove(route)
                     }
+                    routes.saveDefaults()
                 }
             ))
         }
     }
-
 }

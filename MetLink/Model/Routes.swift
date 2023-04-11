@@ -23,10 +23,19 @@ class Routes: ObservableObject {
     var routeList: [Route] = []
     
     init() {
-        //self.getRoutes()
+        if let savedRoutes = UserDefaults.standard.object(forKey: "selectedRoutes") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedRoutes = try? decoder.decode([Route].self, from: savedRoutes) {
+                for route in loadedRoutes {
+                    self.selectedRoutes.insert(route)
+                }
+                //print(loadedStrings) // Prints the list of strings
+            }
+        }
     }
     
     func getRoutesHandler(data:Data) -> Int {
+        routeList = []
         let decoder = JSONDecoder()
         do {
             let jsonRoutes = try decoder.decode([Route].self, from: data)
@@ -36,19 +45,27 @@ class Routes: ObservableObject {
                     routeList.append(route)
                     i += 1
                 }
-            }
+            }            
         }
         catch let error as DecodingError {
-            Logger.logger.log("JSON error:", error)
+            Logger.logger.log(service: "ROUTES", "JSON error:", error)
         }
         catch {
-            Logger.logger.log("General error:", error)
+            Logger.logger.log(service: "ROUTES", "General error:", error)
         }
         return 0
     }
     
     func getRoutes() {
-        MetLink.metlink.callAPI(url: "https://api.opendata.metlink.org.nz/v1/gtfs/routes", handler: getRoutesHandler)
+        MetLink.metlink.callAPI(service: "Routes", url: "https://api.opendata.metlink.org.nz/v1/gtfs/routes", handler: getRoutesHandler)
     }
-
+    
+    func saveDefaults() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(selectedRoutes) {
+            let s = String(data: encoded, encoding: .utf8)
+            //print(s)
+            UserDefaults.standard.set(encoded, forKey: "selectedRoutes")
+        }
+    }
 }

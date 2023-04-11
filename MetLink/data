@@ -1,0 +1,45 @@
+All Routes
+"id": 187,
+    "route_id": "20",
+    "agency_id": "NBM",
+    "route_short_name": "2",
+    "route_long_name": "Karori - Wellington - Hataitai - Miramar/Seatoun",
+
+Trips for Route 20
+     "route_id": 20,
+    "service_id": "29_6",  //Identifies a set of dates when service is available for one or more routes.
+    "trip_id": "2__1__120__NBM__29__6__29__6",
+    "trip_headsign": "",
+    "direction_id": 1,
+    
+    
+All Stops
+     "id": 985,
+         "stop_id": "5000",
+         "stop_code": "5000",
+         "stop_name": "Courtenay Place - Stop A",
+         "stop_desc": "CourtenayPl-A",
+         "zone_id": "1",
+         "stop_lat": -41.29379439,
+         "stop_lon": 174.7823273,
+         "location_type": 0,
+     "id": 2784,
+         "stop_id": "6517",
+         "stop_code": "6517",
+         "stop_name": "Oriental Parade at Grass Street",
+         "stop_desc": "OrientalPde at Grass",
+         "zone_id": "1",
+         "stop_lat": -41.2907498,
+         "stop_lon": 174.796312,
+     
+     
+
+    
+Stop Times for Trip
+    "id": 1,
+    "trip_id": "2__1__120__NBM__29__6__29__6",
+    "arrival_time": "07:30:00",
+    "departure_time": "07:30:00",
+    "stop_id": "4332",
+    
+

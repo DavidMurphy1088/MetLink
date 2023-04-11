@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F629DEA2F000342490 /* MetLinkApp.swift */; };
-		7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F829DEA2F000342490 /* MapContentView.swift */; };
+		7B7306F929DEA2F000342490 /* VehiclePositionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306F829DEA2F000342490 /* VehiclePositionsView.swift */; };
 		7B7306FB29DEA2F200342490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B7306FA29DEA2F200342490 /* Assets.xcassets */; };
 		7B7306FE29DEA2F200342490 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B7306FD29DEA2F200342490 /* Preview Assets.xcassets */; };
 		7B73070029DEA2F200342490 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7306FF29DEA2F200342490 /* Persistence.swift */; };
@@ -18,12 +18,20 @@
 		7B73071129DEF34B00342490 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 7B73071029DEF34B00342490 /* Notes */; };
 		7BD47E0529E156330047A9A3 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0429E156330047A9A3 /* Routes.swift */; };
 		7BD47E0729E15BB70047A9A3 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0629E15BB70047A9A3 /* Globals.swift */; };
+		7BD47E0929E3628F0047A9A3 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 7BD47E0829E3628F0047A9A3 /* data */; };
+		7BD47E0B29E366930047A9A3 /* Trips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0A29E366930047A9A3 /* Trips.swift */; };
+		7BD47E0D29E4135E0047A9A3 /* CalendarDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0C29E4135E0047A9A3 /* CalendarDates.swift */; };
+		7BD47E0F29E429F40047A9A3 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E0E29E429F40047A9A3 /* Schedule.swift */; };
+		7BD47E1129E4371A0047A9A3 /* StopTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E1029E4371A0047A9A3 /* StopTimes.swift */; };
+		7BD47E1329E527960047A9A3 /* ConfigSelectStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E1229E527960047A9A3 /* ConfigSelectStops.swift */; };
+		7BD47E1529E528590047A9A3 /* Stops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E1429E528590047A9A3 /* Stops.swift */; };
+		7BD47E1729E558EE0047A9A3 /* BusTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD47E1629E558EE0047A9A3 /* BusTimesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7B7306F329DEA2F000342490 /* MetLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7306F629DEA2F000342490 /* MetLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetLinkApp.swift; sourceTree = "<group>"; };
-		7B7306F829DEA2F000342490 /* MapContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContentView.swift; sourceTree = "<group>"; };
+		7B7306F829DEA2F000342490 /* VehiclePositionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclePositionsView.swift; sourceTree = "<group>"; };
 		7B7306FA29DEA2F200342490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B7306FD29DEA2F200342490 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7B7306FF29DEA2F200342490 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -34,6 +42,14 @@
 		7B73071029DEF34B00342490 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		7BD47E0429E156330047A9A3 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		7BD47E0629E15BB70047A9A3 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		7BD47E0829E3628F0047A9A3 /* data */ = {isa = PBXFileReference; lastKnownFileType = text; path = data; sourceTree = "<group>"; };
+		7BD47E0A29E366930047A9A3 /* Trips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trips.swift; sourceTree = "<group>"; };
+		7BD47E0C29E4135E0047A9A3 /* CalendarDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDates.swift; sourceTree = "<group>"; };
+		7BD47E0E29E429F40047A9A3 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		7BD47E1029E4371A0047A9A3 /* StopTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopTimes.swift; sourceTree = "<group>"; };
+		7BD47E1229E527960047A9A3 /* ConfigSelectStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigSelectStops.swift; sourceTree = "<group>"; };
+		7BD47E1429E528590047A9A3 /* Stops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stops.swift; sourceTree = "<group>"; };
+		7BD47E1629E558EE0047A9A3 /* BusTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTimesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,14 +82,15 @@
 		7B7306F529DEA2F000342490 /* MetLink */ = {
 			isa = PBXGroup;
 			children = (
-				7B73070D29DED80900342490 /* View */,
-				7B73070C29DED7F700342490 /* Model */,
 				7B7306FA29DEA2F200342490 /* Assets.xcassets */,
-				7B7306FF29DEA2F200342490 /* Persistence.swift */,
+				7BD47E0829E3628F0047A9A3 /* data */,
 				7B73070429DEA2F200342490 /* Info.plist */,
 				7B73070129DEA2F200342490 /* MetLink.xcdatamodeld */,
-				7B7306FC29DEA2F200342490 /* Preview Content */,
+				7B73070C29DED7F700342490 /* Model */,
 				7B73071029DEF34B00342490 /* Notes */,
+				7B7306FF29DEA2F200342490 /* Persistence.swift */,
+				7B7306FC29DEA2F200342490 /* Preview Content */,
+				7B73070D29DED80900342490 /* View */,
 			);
 			path = MetLink;
 			sourceTree = "<group>";
@@ -89,9 +106,14 @@
 		7B73070C29DED7F700342490 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7BD47E0429E156330047A9A3 /* Routes.swift */,
-				7B73070A29DEC49C00342490 /* Positions.swift */,
+				7BD47E0C29E4135E0047A9A3 /* CalendarDates.swift */,
 				7BD47E0629E15BB70047A9A3 /* Globals.swift */,
+				7B73070A29DEC49C00342490 /* Positions.swift */,
+				7BD47E0429E156330047A9A3 /* Routes.swift */,
+				7BD47E0A29E366930047A9A3 /* Trips.swift */,
+				7BD47E0E29E429F40047A9A3 /* Schedule.swift */,
+				7BD47E1029E4371A0047A9A3 /* StopTimes.swift */,
+				7BD47E1429E528590047A9A3 /* Stops.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -99,9 +121,11 @@
 		7B73070D29DED80900342490 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7B7306F829DEA2F000342490 /* MapContentView.swift */,
+				7B7306F829DEA2F000342490 /* VehiclePositionsView.swift */,
 				7B7306F629DEA2F000342490 /* MetLinkApp.swift */,
 				7B73070E29DED8DA00342490 /* ConfigurationView.swift */,
+				7BD47E1229E527960047A9A3 /* ConfigSelectStops.swift */,
+				7BD47E1629E558EE0047A9A3 /* BusTimesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,6 +190,7 @@
 			files = (
 				7B73071129DEF34B00342490 /* Notes in Resources */,
 				7B7306FE29DEA2F200342490 /* Preview Assets.xcassets in Resources */,
+				7BD47E0929E3628F0047A9A3 /* data in Resources */,
 				7B7306FB29DEA2F200342490 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,12 +203,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B73070329DEA2F200342490 /* MetLink.xcdatamodeld in Sources */,
+				7BD47E1529E528590047A9A3 /* Stops.swift in Sources */,
 				7B73070029DEA2F200342490 /* Persistence.swift in Sources */,
+				7BD47E0F29E429F40047A9A3 /* Schedule.swift in Sources */,
 				7B73070F29DED8DA00342490 /* ConfigurationView.swift in Sources */,
 				7BD47E0529E156330047A9A3 /* Routes.swift in Sources */,
 				7BD47E0729E15BB70047A9A3 /* Globals.swift in Sources */,
+				7BD47E0B29E366930047A9A3 /* Trips.swift in Sources */,
 				7B73070B29DEC49C00342490 /* Positions.swift in Sources */,
-				7B7306F929DEA2F000342490 /* MapContentView.swift in Sources */,
+				7BD47E0D29E4135E0047A9A3 /* CalendarDates.swift in Sources */,
+				7BD47E1729E558EE0047A9A3 /* BusTimesView.swift in Sources */,
+				7B7306F929DEA2F000342490 /* VehiclePositionsView.swift in Sources */,
+				7BD47E1329E527960047A9A3 /* ConfigSelectStops.swift in Sources */,
+				7BD47E1129E4371A0047A9A3 /* StopTimes.swift in Sources */,
 				7B7306F729DEA2F000342490 /* MetLinkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

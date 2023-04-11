@@ -26,7 +26,7 @@ struct VehiclePosition: Codable, Hashable {
         hasher.combine(timestamp)
     }
     
-    let trip: Trip
+    let trip: VehicleTrip
     let position: Position
     let vehicle: InnerVehicle
     let timestamp: Int
@@ -37,7 +37,7 @@ struct VehiclePosition: Codable, Hashable {
     }
 }
 
-struct Trip: Codable {
+struct VehicleTrip: Codable {
     //let start_time: String
     let trip_id: String
     let direction_id: Int
@@ -89,11 +89,7 @@ class VehiclePositions: ObservableObject {
     @Published var status:String?
     @Published var vehiclePositions:[VehiclePosition] = []
     var logger = Logger.logger
-    
-    init() {
-        //self.getPositions()
-    }
-    
+
     func checkData(_ data: Data) -> Bool {
         if let jsonString = String(data: data, encoding: .utf8) {
             print("\n\n", jsonString, "\n")
@@ -102,7 +98,9 @@ class VehiclePositions: ObservableObject {
         return false
     }
     
+    
     func getPositionsHandler(data:Data) -> Int {
+        vehiclePositions = []
         let decoder = JSONDecoder()
         do {
             let response = try decoder.decode(PositionsResponse.self, from: data)
@@ -113,42 +111,33 @@ class VehiclePositions: ObservableObject {
                 self.lastGetTime = Date()
                 self.vehiclePositions = []
                 var routeIdSet: Set<Int> = []
-                print("\n")
-                
                 for ent in entity {
                     if let vehicle = ent.vehicle {
                         routeIdSet.insert(vehicle.trip.route_id)
                         if vehicle.trip.route_id == 20 {
-                            //busIdSet.insert(ent.vehicle.trip.)
                             self.vehiclePositions.append(vehicle)
-                            if self.vehiclePositions.count % 1 == 0 {
-                                //let tsDate = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
-                                //let secsDiff = Int(Date().timeIntervalSince(tsDate))
-                                print("\tAge", vehicle.readingAgeSeconds(), "\tRoute", vehicle.trip.route_id, "\tDirection", vehicle.trip.direction_id, "\tTrip", vehicle.trip.trip_id)
-                                //"\tloaded count:", self.vehiclePositions.count)
-                            }
-                        }
-                        if self.vehiclePositions.count > 10000 {
-                            break
+//                            if self.vehiclePositions.count % 1 == 0 {
+//                                print("\tAge", vehicle.readingAgeSeconds(), "secs \tRoute", vehicle.trip.route_id, "\tDirection", vehicle.trip.direction_id, "\tTrip", vehicle.trip.trip_id)
+//                            }
                         }
                     }
                 }
-                print("All routes", routeIdSet.sorted())
-                self.logger.log("Loaded \(self.vehiclePositions.count) trips")
+                //print("All routes", routeIdSet.sorted())
+                //self.logger.log("Loaded \(self.vehiclePositions.count) trips")
             }
         }
         catch let error as DecodingError {
-            Logger.logger.log("JSON error:", error)
+            Logger.logger.log(service: "POSITIONS", "JSON error:", error)
             //print("checkData:", self.checkData(data))
         }
         catch {
-            Logger.logger.log("General error:", error)
+            Logger.logger.log(service: "POSITIONS", "General error:", error)
         }
         
         return 0
     }
     
     func getPositions() {
-        MetLink.metlink.callAPI(url: "https://api.opendata.metlink.org.nz/v1/gtfs-rt/vehiclepositions", handler: getPositionsHandler)
+        MetLink.metlink.callAPI(service: "Positions", url: "https://api.opendata.metlink.org.nz/v1/gtfs-rt/vehiclepositions", handler: getPositionsHandler)
     }
 }

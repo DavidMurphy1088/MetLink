@@ -10,7 +10,7 @@ struct AnnotationItem: Identifiable {
 
 //https://kristaps.me/blog/swiftui-map-annotations/
 
-struct MapContentView: View {
+struct VehiclePositionsView: View {
     @ObservedObject var vehiclePositions = VehiclePositions.vehiclePositions
     let coordinate = CLLocationCoordinate2D(latitude: -41.289257, longitude: 174.7752991)
 

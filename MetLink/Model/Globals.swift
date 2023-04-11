@@ -4,8 +4,8 @@ class Logger : ObservableObject {
     static var logger = Logger()
     var message:String=""
     
-    func log(_ str:String, _ err:Error? = nil) {
-        var msg = "Logger:"
+    func log(service:String, _ str:String, _ err:Error? = nil) {
+        var msg = "Logger-" + service + ":"
         if let err = err {
             msg += "*** ERROR ***"
             msg += "\nlocalMsg:"+err.localizedDescription
@@ -28,24 +28,6 @@ class Logger : ObservableObject {
 class MetLink {
     static var metlink = MetLink()
     
-    init() {
-        let dispatchGroup = DispatchGroup()
-
-        dispatchGroup.enter()
-        Routes.routes.getRoutes()
-//        { result in
-//            dispatchGroup.leave()
-//        }
-
-        dispatchGroup.wait()
-
-        dispatchGroup.enter()
-        VehiclePositions.vehiclePositions.getPositions()
-            // Handle the result of the second API call
-            //dispatchGroup.leave()
-        //}
-    }
-    
     func makeRequest(_ urlStr:String) -> URLRequest {
         let url = URL(string: urlStr)!
         var request = URLRequest(url: url)
@@ -55,16 +37,22 @@ class MetLink {
         return request
     }
     
-    func callAPI(url:String, handler: @escaping (Data) -> Int) {
+    func callAPI(service:String, url:String, handler: @escaping (Data) -> Int, dispatchGroup:DispatchGroup? = nil ) {
+        //print("->METLINK:", service, "starting", "\t", Thread.current.isMainThread, Thread.current)
         let request = MetLink.metlink.makeRequest(url)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            //print("->METLINK:", service, "received data", "\t", Thread.current.isMainThread, Thread.current)
             guard let data = data, error == nil else {
-                Logger.logger.log("no data error loading:", error)
+                Logger.logger.log(service: "METLINK", "no data error loading:", error)
                 return
             }
-            
             DispatchQueue.main.async {
-                handler(data)
+                //print("   METLINK:", service, "starting handler", service, "\t", Thread.current.isMainThread, Thread.current)
+                let result = handler(data)
+                print("   METLINK:", service, "end handler", service, "Result", result)
+                if let dispatchGroup = dispatchGroup {
+                    dispatchGroup.leave()
+                }
             }
         }
         task.resume()
